@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<!-- 
+Para anexar (adicionar ou mostrar) uma imagem em HTML, utilize a tag <img>. 
+Exemplo de uso:
+
+<img src="caminho/para/sua-imagem.jpg" alt="Descrição da imagem">
+
+- O atributo src define o caminho da imagem (pode ser um arquivo local ou URL).
+- O atributo alt é uma descrição alternativa da imagem.
+
+Exemplo prático:
+<img src="logo.png" alt="Logo da empresa">
+
+Se quiser criar um botão para o usuário ANEXAR/ENVIAR uma imagem (por exemplo, em um formulário), utilize <input type="file">:
+
+<form method="POST" enctype="multipart/form-data">
+  <input type="file" name="imagem" accept="image/*">
+  <button type="submit">Enviar Imagem</button>
+</form>
+-->
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+    <meta name="description" content="Os melhores salgados artesanais para sua festa ou lanche. Qualidade, sabor e entrega rápida.">
+    <meta name="author" content="DGA - Salgados Delícia">
+    <meta name="theme-color" content="#ffbe76">
+
+    <title>DGA - Salgados Delícia | O melhor da sua região!</title>
+
+    <!-- Google Fonts para uma aparência mais agradável -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS base do projeto -->
+    <link rel="stylesheet" href="cores.css">
+    <link rel="stylesheet" href="estilos.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Melhoria visual e centralização -->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(120deg, #fffbe6 0%, #ffd9b3 100%);
+            font-family: 'Rubik', Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            width: 100%;
+            background: #fffbe6de;
+            box-shadow: 0 2px 8px #ffd9b3cc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.2rem 0 0.8rem;
+        }
+        h1 {
+            margin: 0;
+            color: var(--cor-primaria, #ffbe76);
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        nav a {
+            color: var(--cor-primaria, #ff7538);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.13rem;
+            border-radius: 7px;
+            padding: 0.4rem 1.1rem;
+            transition: background .20s, color .2s;
+        }
+        nav a:hover, nav a:focus {
+            background: var(--cor-primaria, #ffbe76);
+            color: #fff;
+        }
+        main.container {
+            flex: 1;
+            max-width: 950px;
+            margin: 2.5rem auto 1.5rem auto;
+            background: #fffbe6f7;
+            border-radius: 16px;
+            box-shadow: 0 4px 32px 0 #e9cfa71f;
+            padding: 2.2rem 1.4rem 2.5rem 1.4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Produtos organizados em grid responsivo */
+        .produtos {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+        }
+        .produto {
+            background: #fff;
+            padding: 1.1rem 0.7rem 1.3rem 0.7rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 12px #ffbe7650;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.14s;
+        }
+        .produto:hover {
+            transform: translateY(-3px) scale(1.025);
+            box-shadow: 0 3px 18px #fa9855aa;
+        }
+        .produto img {
+            width: 100%;
+            max-width: 140px;
+            border-radius: 9px;
+            margin-bottom: 0.9rem;
+        }
+        .produto h3 {
+            margin: 0.3rem 0 0.6rem 0;
+            color: var(--cor-secundaria, #d35400);
+            font-size: 1.27rem;
+        }
+        .produto p {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+        .preco {
+            color: var(--cor-primaria, #ff7538);
+            font-weight: 700;
+            font-size: 1.15rem;
+            background: #fffbe6;
+            padding: 0.30rem 0.98rem;
+            border-radius: 14px;
+            margin-top: 0.18rem;
+        }
+        .cta-btn {
+            background: linear-gradient(90deg, #ffa75a 0%, #f7c873 100%);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.18rem;
+            padding: 0.8rem 2.4rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background 0.15s, box-shadow 0.15s;
+            box-shadow: 0 3px 16px 0 #ffdabb4a;
+            margin-top: 1.4rem;
+            display: inline-block;
+        }
+        .cta-btn:hover, .cta-btn:focus {
+            background: linear-gradient(90deg, #f88a2d 0%, #ffc86e 100%);
+            box-shadow: 0 2px 16px #f1a36185;
+        }
+        section h2 {
+            font-size: 2rem;
+            text-align: center;
+            color: var(--cor-primaria, #ffbe76);
+            margin-bottom: 1.2rem;
+        }
+        section#sobre, section#contato {
+            width: 100%;
+            max-width: 580px;
+            margin: 3rem auto 0 auto;
+        }
+        section#sobre p, section#contato p {
+            font-size: 1.07rem;
+            text-align: center;
+            color: #554c39;
+        }
+        @media (max-width: 800px) {
+            main.container {
+                max-width: 99vw;
+                padding: 1rem 0.3rem 1.4rem 0.3rem;
+            }
+            section#sobre, section#contato {
+                max-width: 97vw;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 1.58rem; }
+            nav { gap: 0.5rem; }
+            .produto img { max-width: 85px;}
+            .produtos { gap: 1.2rem; }
+            .cta-btn { font-size: 1rem; padding: 0.62rem 1.1rem;}
+            main.container { padding: 0.5rem 0.1rem 0.8rem 0.1rem; }
+            section h2 { font-size: 1.22rem; }
+        }
+    </style>
+</head>
+    <!-- Importa primeiro as cores, depois o CSS principal -->
+    <link rel="stylesheet" href="cores.css">
+    <link rel="stylesheet" href="estilos.css">
+
+    <!-- Melhoria: Ícone Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Melhoria: Responsividade e visualício -->
+    <style>
+        body {
+            background: linear-gradient(120deg, #fffbe6 0%, #ffd9b3 100%);
+            font-family: 'Rubik', Arial, sans-serif;
+        }
+        header, nav, main, section, footer {
+            transition: box-shadow 0.2s;
+        }
+        header {
+            box-shadow: 0 4px 14px 0 #0001;
+            padding: 1rem 0.5rem;
+            background: #fffbe6d9;
+        }
+        nav a {
+            color: var(--cor-primaria, #ffbe76);
+            margin: 0 0.7rem;
+            font-weight: 600;
+            font-size: 1.08rem;
+            text-decoration: none;
+            padding: 0.2rem 0.7rem;
+            border-radius: 6px;
+            transition: background .25s, color .25s;
+        }
+        nav a:hover {
+            background: var(--cor-primaria, #ffbe76);
+            color: #fff;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            nav { display: flex; flex-wrap: wrap; justify-content: center;}
+            nav a { font-size: 1rem; margin: 0.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DGA - Salgados Delícia</h1>
+        <nav>
+            <a href="#produtos">Produtos</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+    <main class="container">
+        <section id="produtos">
+            <h2 style="text-align:center; margin-bottom:2rem; color:var(--cor-primaria);">Nossos Salgados</h2>
+            <div class="produtos">
+                <div class="produto">
+                    <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?fit=crop&w=400&q=80" alt="Coxinha de Frango">
+                    <h3>Coxinha de Frango</h3>
+                    <p>Coxinha recheada com frango temperado, massa crocante e deliciosa.</p>
+                    <span class="preco">R$ 4,00</span>
+                </div>
+                <div class="produto">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?fit=crop&w=400&q=80" alt="Risole de Presunto e Queijo">
+                    <h3>Risole de Presunto e Queijo</h3>
+                    <p>Massa leve e recheio cremoso de presunto e queijo de qualidade premium.</p>
+                    <span class="preco">R$ 4,50</span>
+                </div>
+                <div class="produto">
+                    <img src="https://images.unsplash.com/photo-1514512364185-4c1551d58ac4?fit=crop&w=400&q=80" alt="Empada de Palmito">
+                    <h3>Empada de Palmito</h3>
+                    <p>Empada macia recheada com palmito, massa amanteigada, sabor irresistível.</p>
+                    <span class="preco">R$ 5,00</span>
+                </div>
+                <div class="produto">
+                    <img src="https://images.unsplash.com/photo-1458640904116-093b74971de9?fit=crop&w=400&q=80" alt="Quibe">
+                    <h3>Quibe</h3>
+                    <p>Quibe assado ou frito, tempero árabe, sabor marcante e irresistível.</p>
+                    <span class="preco">R$ 3,50</span>
+                </div>
+                <div>
+                    <img src="C:\Users\elain\Downloads\IMG-20251219-WA0010.jpg" alt="Tabela de Preços">
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:2.5rem;">
+                <a class="cta-btn" href="https://wa.me/21972603802?text=Quero%20encomendar%20salgados!" target="_blank">Pedir pelo WhatsApp</a>
+            </div>
+        </section>
+        <section id="sobre" style="margin-top: 3rem;">
+            <h2 style="color:var(--cor-primaria); text-align:center;">Sobre Nós</h2>
+            <p style="max-width:580px; margin:1.2rem auto; text-align:center;">
+                Somos apaixonados por salgados! Produzimos diariamente delícias com ingredientes frescos, oferecendo a melhor experiência para sua festa, evento ou lanche. Atendimento cordial, entrega rápida e qualidade garantida.
+            </p>
+        </section>
+        <section id="contato" style="margin-top: 3rem;">
+            <h2 style="color:var(--cor-primaria); text-align:center;">Contato</h2>
+            <form style="max-width:390px; margin:1rem auto; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08); padding:1.5rem;">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" required style="width:100%;margin:0.3em 0 1em 0;padding:0.45em; border-radius:4px; border:1px solid #ddd;">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required style="width:100%;margin:0.3em 0 1em 0;padding:0.45em; border-radius:4px; border:1px solid #ddd;">
+                <label for="mensagem">Mensagem</label>
+                <textarea id="mensagem" name="mensagem" rows="3" required style="width:100%;margin:0.3em 0 1em 0;padding:0.45em; border-radius:4px; border:1px solid #ddd;"></textarea>
+                <button type="submit" class="cta-btn" style="width:100%;">Enviar</button>
+            </form>
+            <p style="text-align:center; margin-top:1.1em;">
+                Ou fale com a gente pelo <a href="https://wa.me/21972603802" target="_blank" style="color:var(--cor-primaria);text-decoration:underline;">WhatsApp</a>
+            </p>
+        </section>
+    </main>
+    <footer>
+        &copy; 2026 DGA - Salgados Delícia – Todos os direitos reservados.
+    </footer>
+
+</body>
+</html>
